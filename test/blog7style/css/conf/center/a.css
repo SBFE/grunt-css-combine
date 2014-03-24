@@ -1,0 +1,8 @@
+﻿@charset "utf-8";
+/*博文页样式汇总*/
+
+/*博文页公用样式*/
+@import url("../../module/blog/article.css");
+
+/*浮层公用样式，添加浮层需先添加此样式*/ 
+@import url("../../module/layer/layer.css");
