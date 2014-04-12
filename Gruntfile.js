@@ -1,6 +1,6 @@
 /*
- * fdserver
- * https://github.com/xiaoyue3/gruntplugin
+ * grunt-css-combine
+ * https://github.com/liuxiaoyue/grunt-css-combine
  *
  * Copyright (c) 2014 xiaoyue
  * Licensed under the MIT license.
@@ -32,13 +32,10 @@ module.exports = function(grunt) {
     csscombine: {
       default_options: {
         options: {
-          // baseUrl : 'test/',
-          projectName : 'blog7style',      //工程名
-          reset : true,   //是否进行增量打包
-          minify: true     //是否压缩文件          
+          projectName : 'blog7style'      //工程名     
         },
         files: {
-          'test/tmp': 'test/'
+          'test/tmp/': 'test/'
         }
       },
     },
@@ -60,10 +57,8 @@ module.exports = function(grunt) {
   // Whenever the "test" task is run, first clean the "tmp" dir, then run this
   // plugin's task(s), then test the result.
   // grunt.registerTask('test', ['clean', 'fdserver', 'nodeunit']);
-
   grunt.registerTask('test', ['clean','csscombine']);
 
   // By default, lint and run all tests.
-  // grunt.registerTask('default', ['jshint', 'test']);
-
+  // grunt.registerTask('default', ['test']);
 };
