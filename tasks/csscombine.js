@@ -50,13 +50,13 @@ module.exports = function(grunt) {
 		    						return  Path.extname(value) != '.css' && Path.extname(value) != '.html';
 		    		});
 		    		imageList.forEach(function(file){
-		    			var filename = file.replace(toolOptions.basedir,'')
+		    			var filename = file.replace(toolOptions.basedir,'');
 						grunt.file.copy(file, Path.join(f.dest,filename));
 						grunt.log.writeln('File "' + file + '" created.');
 		    		});
 		    		async.each(confList, function(file, callback) {
 		    			findCssAllImport(file,cssListCon,function(data){
-		    				var filename = Path.basename(file);
+		    				var filename = file.replace(toolOptions.basedir,'');
 			    			grunt.file.write(f.dest + filename, data);
 			    			grunt.log.writeln('File "' + f.dest + filename + '" created.');
 			    		});
