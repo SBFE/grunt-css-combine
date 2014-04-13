@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 			toolOptions.projectName = options.projectName;
 		}
 	    this.files.forEach(function(f) {
-	      	var confList, cssListCon, cssList;	
+	      	var confList, cssListCon, cssList, imageList;	
 		    f.src.filter(function(path) {
 		        if (grunt.file.exists(path)) {
 					return true;
@@ -36,24 +36,31 @@ module.exports = function(grunt) {
 				}
 		    }).forEach(function(path) {
 		    	if(grunt.file.isDir(path)){
-		    		//打包的根目录 打包的工程名 在此目录下进行打包
+		    		//合并的根目录
 		    		toolOptions.basedir = Path.resolve(path,toolOptions.projectName);
-		    		//获取要打包的文件夹下所有的js文件地址
+		    		//获取要合并的文件夹下所有的css文件列表包括：html，image，css
 		    		cssList = findFiles.allCssFilesList(toolOptions.basedir);
-		    		//获取要打包的文件夹下所有的js文件内容
+		    		//获取要合并的文件夹下所有的css文件内容
 		    		cssListCon = findFiles.allCssFilesCon(cssList,toolOptions.basedir);
-		 		    //获取要打包的文件夹下所有需要合并并打包的文件列表
+		 		    //获取要合并的文件夹下所有需要合并的文件列表
 		    		confList = cssList.filter(function(value,key){
-									return (value.match(/\\conf\\/) || Path.extname(value) != '.css');
+									return (value.match(/\\conf\\/) && Path.extname(value) === '.css');
 								});
-		    		
+		    		imageList = cssList.filter(function(value,key){
+		    						return  Path.extname(value) != '.css' && Path.extname(value) != '.html';
+		    		});
+		    		imageList.forEach(function(file){
+		    			var filename = file.replace(toolOptions.basedir,'')
+						grunt.file.copy(file, Path.join(f.dest,filename));
+						grunt.log.writeln('File "' + file + '" created.');
+		    		});
 		    		async.each(confList, function(file, callback) {
 		    			findCssAllImport(file,cssListCon,function(data){
 		    				var filename = Path.basename(file);
 			    			grunt.file.write(f.dest + filename, data);
 			    			grunt.log.writeln('File "' + f.dest + filename + '" created.');
 			    		});
-					}, function(err){
+					},function(err){
 					  	done();
 					});
 		    	}

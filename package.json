@@ -1,7 +1,7 @@
 {
   "name": "grunt-css-combine",
   "description": "a simple, efficient, convenient css combine",
-  "version": "0.0.7",
+  "version": "0.0.1",
   "homepage": "https://github.com/liuxiaoyue/grunt-css-combine",
   "author": {
     "name": "xiaoyue"
@@ -26,7 +26,8 @@
     "test": "grunt test"
   },
   "dependencies":{
-    "js-combine-pack": "*"
+    "js-combine-pack": "*",
+    "async":"*"
   },
   "devDependencies": {
     "grunt-contrib-clean": "~0.4.0",
