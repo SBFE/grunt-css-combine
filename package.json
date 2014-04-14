@@ -1,7 +1,7 @@
 {
   "name": "grunt-css-combine",
   "description": "a simple, efficient, convenient css combine",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/liuxiaoyue/grunt-css-combine",
   "author": {
     "name": "xiaoyue"

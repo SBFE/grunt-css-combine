@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 									return (value.match(/\\conf\\/) && Path.extname(value) === '.css');
 								});
 		    		imageList = cssList.filter(function(value,key){
-		    						return  Path.extname(value) != '.css' && Path.extname(value) != '.html';
+		    						return  Path.extname(value) != '.css' && Path.extname(value) != '.html' && !value.match(/\\html\\/);
 		    		});
 		    		imageList.forEach(function(file){
 		    			var filename = file.replace(toolOptions.basedir,'');
