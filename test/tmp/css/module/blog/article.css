@@ -1,0 +1,9 @@
+﻿@charset "utf-8";
+@import url("../../module/common/topbar.css"); 
+/* 
+@import url("public.css"); 全局 公用元素
+*/
+/* 公共样式 */
+/* general */
+body,fieldset,th,td,select,input,textarea{font-size:12px;font-family:Verdana, "宋体", sans-serif}
+select,input{vertical-align:middle}

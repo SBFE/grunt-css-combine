@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 			toolOptions.projectName = options.projectName;
 		}
 	    this.files.forEach(function(f) {
-	      	var confList, cssListCon, cssList, imageList;	
+	      	var confList, cssListCon, cssList, imageList, noCombineCssList;	
 		    f.src.filter(function(path) {
 		        if (grunt.file.exists(path)) {
 					return true;
@@ -44,15 +44,23 @@ module.exports = function(grunt) {
 		    		cssListCon = findFiles.allCssFilesCon(cssList,toolOptions.basedir);
 		 		    //获取要合并的文件夹下所有需要合并的文件列表
 		    		confList = cssList.filter(function(value,key){
-									return (value.match(/\\conf\\/) && Path.extname(value) === '.css');
-								});
+						return (value.match(/\\conf\\/) && Path.extname(value) === '.css');
+					});
 		    		imageList = cssList.filter(function(value,key){
-		    						return  Path.extname(value) != '.css' && Path.extname(value) != '.html' && !value.match(/\\html\\/);
+		    			return Path.extname(value) != '.css' && Path.extname(value) != '.html' && !value.match(/\\html\\/);
+		    		});
+		    		noCombineCssList = cssList.filter(function(value,key) {
+		    			return (!value.match(/\\conf\\/) && Path.extname(value) === '.css');
+		    		});
+		    		noCombineCssList.forEach(function(file){
+		    			var filename = file.replace(toolOptions.basedir,'');
+						grunt.file.copy(file, Path.join(f.dest,filename));
+						grunt.log.writeln('noCombineCssFile "' + file + '" created.');
 		    		});
 		    		imageList.forEach(function(file){
 		    			var filename = file.replace(toolOptions.basedir,'');
 						grunt.file.copy(file, Path.join(f.dest,filename));
-						grunt.log.writeln('File "' + file + '" created.');
+						grunt.log.writeln('imageFile "' + file + '" created.');
 		    		});
 		    		async.each(confList, function(file, callback) {
 		    			findCssAllImport(file,cssListCon,function(data){

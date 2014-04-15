@@ -1,0 +1,7 @@
+﻿@charset "utf-8";
+/* 顶部托盘 dongyan */
+.nsinatopbar{ min-width:950px; height:30px; overflow:hidden; font-size:12px; font-family:"宋体"; background:url(../../../images/common/topbar/topbar.png?20121031) repeat-x 0px 0px;}
+.nsinatopbar a,
+.nsinatopbar a:link,
+.nsinatopbar a:visited{color:#2e3092; text-decoration:none;}
+.nsinatopbar a:hover{ color:#2e3092; text-decoration:underline;}

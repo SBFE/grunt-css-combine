@@ -1,0 +1,8 @@
+@charset "utf-8";
+/* 公用-clearfix */
+
+.clearfix:after { content:"."; clear:both; display:block; height:0; visibility:hidden; overflow:hidden; }
+.clearfix { display: inline-table; }
+.CP_w_shut{ background-image:url(../../../images/common/layer/layerbg1.png);_background-image:url(../../../images/common/layer/layerbg1.gif);}
+
+
